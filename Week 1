@@ -1,102 +1,101 @@
 1.program to input elements into array and print all the elements
-ANWER=
-# Initialize an empty list
-arr = []
 
-# Input number of elements
-n = int(input("Enter the number of elements: "))
+// Program to input elements into array and print them 
+#include <stdio.h>
 
-# Input elements one by one
-for i in range(n):
-    element = input(f"Enter element {i + 1}: ")
-    arr.append(element)
+int main() {
+   int range;
+   
+   printf("Enter the number of elements in the array: ");
+   scanf("%d", &range );
+   int arr[range];
+   printf("Enter the elements in the array : \n");
+   
+   for(int i = 0 ; i<range;i++){
+       printf("Element %d :",i+1);
+       scanf("%d",&arr[i]);
+   }
+   printf("The elements in the array are : ");
+   for(int i = 0 ; i<range;i++){
+       printf("%d ",arr[i]);
+   }
 
-# Print all elements
-print("\nThe elements in the array are:")
-for i in arr:
-    print(i)
- 
 
 
 2.program to count the no. of positive and negative  numbers
-ANSWER=
-# Initialize counters
-positive_count = 0
-negative_count = 0
 
-# Input number of elements
-n = int(input("Enter the number of elements: "))
+// Program to count the no's of positive and negative number in an array
+#include <stdio.h>
 
-# Loop to input elements
-for i in range(n):
-    num = float(input(f"Enter number {i + 1}: "))
+int main() {
+    int n, i, positive = 0, negative = 0;
     
-    if num > 0:
-        positive_count += 1
-    elif num < 0:
-        negative_count += 1
-
-# Print the counts
-print("\nNumber of positive numbers:", positive_count)
-print("Number of negative numbers:", negative_count)
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+    
+    int arr[n];
+    
+    printf("Enter %d elements:\n", n);
+    for(i = 0; i < n; i++) {
+        printf("Element %d: ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+    
+    // Count positive and negative numbers
+    for(i = 0; i < n; i++) {
+        if(arr[i] > 0)
+            positive++;
+        else if(arr[i] < 0)
+            negative++;
+    }
 
 
 
 3.convert decimal to binary
-ANSWER=
-def decimal_to_binary(decimal):
-    # Check if the input number is 0
-    if decimal == 0:
-        return "0"  # Binary representation of 0 is simply "0"
 
-    binary = ""  # Initialize an empty string to build the binary result
+// Convert decimal to binary
+#include <stdio.h>
 
-    # Continue looping until the decimal becomes 0
-    while decimal > 0:
-        remainder = decimal % 2  # Get the remainder (0 or 1)
-        binary = str(remainder) + binary  # Prepend the remainder to the binary string
-        decimal = decimal // 2  # Divide the decimal number by 2 (integer division)
+int main() {
+    int num, binary[32], i = 0;
 
-    return binary  # Return the final binary representation
+    printf("Enter a decimal number: ");
+    scanf("%d", &num);
 
+    while (num > 0) {
+        binary[i] = num % 2;
+        num = num / 2;
+        i++;
+    }
 
-# Ask the user to input a decimal number
-num = int(input("Enter a decimal number: "))
+    printf("Binary: ");
+    for (int j = i - 1; j >= 0; j--) {
+        printf("%d", binary[j]);
+    }
 
-# Call the function to convert the number to binary
-binary = decimal_to_binary(num)
-
-# Print the result
-print(f"Binary representation: {binary}")
+    return 0;
+}
 
 
 
 4.generate  n no. of terms in fibonacci series
-ANSWER=
-def generate_fibonacci(n):
-    # Check if the number of terms is valid
-    if n <= 0:
-        print("Please enter a positive integer.")
-        return []
-    elif n == 1:
-        return [0]  # Only the first term
-    elif n == 2:
-        return [0, 1]  # First two terms
 
-    # Start with the first two terms of the Fibonacci series
-    fib_series = [0, 1]
+// Generate 'n' no of terms in Fibonacci series
+#include <stdio.h>
 
-    # Generate the remaining terms
-    for i in range(2, n):
-        next_term = fib_series[-1] + fib_series[-2]  # Sum of last two terms
-        fib_series.append(next_term)  # Add next term to the list
+int main() {
+    int n, a = 0, b = 1, next;
 
-    return fib_series
+    printf("Enter the number of terms: ");
+    scanf("%d", &n);
 
+    printf("Fibonacci Series: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", a);
+        next = a + b;
+        a = b;
+        b = next;
+    }
 
-# Ask the user how many terms to generate
-num_terms = int(input("Enter the number of terms: "))
-
-# Generate and display the Fibonacci series
-fibonacci_series = generate_fibonacci(num_terms)
-print("Fibonacci Series:", fibonacci_series)
+    return 0;
+}
