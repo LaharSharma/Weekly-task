@@ -406,3 +406,169 @@ int main() {
 
     return 0;
 }
+
+
+
+
+11. Write a program to input the elements of a two dimensional array. Then from this array, make two  arrays—one that stores all odd elements of the two-dimensional array and the other that stores all even elements of the array.
+
+#include <stdio.h>
+
+int main() {
+    int mat[10][10];
+    int rows, cols, i, j;
+    int odd_array[100], even_array[100];
+    int odd_count = 0, even_count = 0;
+
+    printf("Enter the number of rows and columns: ");
+    scanf("%d %d", &rows, &cols);
+
+    printf("Enter the matrix elements:\n");
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            scanf("%d", &mat[i][j]);
+            // check if the element is even or odd and store it
+            if (mat[i][j] % 2 == 0) {
+                even_array[even_count++] = mat[i][j];
+            } else {
+                odd_array[odd_count++] = mat[i][j];
+            }
+        }
+    }
+
+    printf("\nOdd elements array:\n");
+    for (i = 0; i < odd_count; i++) {
+        printf("%d ", odd_array[i]);
+    }
+    printf("\n");
+
+    printf("\nEven elements array:\n");
+    for (i = 0; i < even_count; i++) {
+        printf("%d ", even_array[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+
+
+12. Write a program to read two floating point numbe arrays. Merge the two arrays and display the resultant array in reverse order.
+
+#include <stdio.h>
+
+int main() {
+    float arr1[50], arr2[50], merged_array[100];
+    int n1, n2, i, merged_size;
+
+    printf("Enter the size of the first array: ");
+    scanf("%d", &n1);
+    printf("Enter its elements: ");
+    for (i = 0; i < n1; i++) scanf("%f", &arr1[i]);
+
+    printf("Enter the size of the second array: ");
+    scanf("%d", &n2);
+    printf("Enter its elements: ");
+    for (i = 0; i < n2; i++) scanf("%f", &arr2[i]);
+
+    merged_size = n1 + n2;
+
+    // First, copy elements from the first array
+    for (i = 0; i < n1; i++) {
+        merged_array[i] = arr1[i];
+    }
+    // Then, append elements from the second array
+    for (i = 0; i < n2; i++) {
+        merged_array[n1 + i] = arr2[i];
+    }
+
+    printf("\nMerged array in reverse order:\n");
+    // Print the merged array starting from the end
+    for (i = merged_size - 1; i >= 0; i--) {
+        printf("%.2f ", merged_array[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+
+
+13. Write a program using pointers to interchange the second biggest and the second smallest number in the array.
+
+#include <stdio.h>
+
+int main() {
+    int arr[100], n, i;
+    int smallest, second_smallest, largest, second_largest;
+    int pos_ss = -1, pos_sl = -1;
+    int *ptr_ss, *ptr_sl, temp;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    if (n < 2) {
+        printf("Need at least two elements.\n");
+        return 1;
+    }
+
+    printf("Enter %d elements: ", n);
+    for (i = 0; i < n; i++) scanf("%d", &arr[i]);
+
+    // Initialize with the first two elements to handle various cases
+    if (arr[0] > arr[1]) {
+        largest = arr[0];
+        second_largest = arr[1];
+        smallest = arr[1];
+        second_smallest = arr[0];
+    } else {
+        largest = arr[1];
+        second_largest = arr[0];
+        smallest = arr[0];
+        second_smallest = arr[1];
+    }
+    
+    // Find the required elements
+    for (i = 2; i < n; i++) {
+        if (arr[i] > largest) {
+            second_largest = largest;
+            largest = arr[i];
+        } else if (arr[i] > second_largest) {
+            second_largest = arr[i];
+        }
+
+        if (arr[i] < smallest) {
+            second_smallest = smallest;
+            smallest = arr[i];
+        } else if (arr[i] < second_smallest) {
+            second_smallest = arr[i];
+        }
+    }
+
+    // Find the indices to swap
+    for(i = 0; i < n; i++) {
+        if(arr[i] == second_smallest) pos_ss = i;
+        if(arr[i] == second_largest) pos_sl = i;
+    }
+
+    if (pos_ss != -1 && pos_sl != -1) {
+        printf("Swapping second smallest (%d) and second largest (%d).\n", second_smallest, second_largest);
+        // Use pointers to perform the swap
+        ptr_ss = &arr[pos_ss];
+        ptr_sl = &arr[pos_sl];
+
+        temp = *ptr_ss;
+        *ptr_ss = *ptr_sl;
+        *ptr_sl = temp;
+    }
+
+    printf("Array after interchanging:\n");
+    for (i = 0; i < n; i++) printf("%d ", arr[i]);
+    printf("\n");
+
+    return 0;
+}
+
+
+
+14. 
